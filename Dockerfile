@@ -2,14 +2,11 @@
 FROM node:lts AS base
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 COPY . .
-RUN pnpm run build
+RUN yarn run build
 
 # Runtime stage for serving the application
 FROM nginx:mainline-alpine-slim AS runtime

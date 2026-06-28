@@ -26,8 +26,5 @@ pnpm-debug.log*
 # pagefind
 public/pagefind
 
-# pnpm
-.pnpm-store
-
 # docker compose
 compose.override.yaml

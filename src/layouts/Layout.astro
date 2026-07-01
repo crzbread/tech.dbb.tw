@@ -95,6 +95,19 @@ const rssHref = getRelativeLocaleUrl(
       )
     }
 
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TTGV121HYW"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-TTGV121HYW");
+    </script>
+
     <!--
       Inline FOUC-prevention script: sets data-theme on <html> before
       the browser paints. Runs synchronously, no defer/async.

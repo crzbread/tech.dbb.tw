@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
@@ -10,6 +9,7 @@ import Socials from "@/components/Socials.astro";
 import Card from "@/components/Card.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getAssetPath } from "@/utils/withBase";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
@@ -23,39 +23,41 @@ const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const homePath = getRelativeLocaleUrl(locale, "");
+const heroImage = getAssetPath("images/home-hero.png");
 ---
 
 <Layout>
   <Header />
-  <main
-    id="main-content"
-    data-layout="index"
-    data-home-path={homePath}
-    class="app-layout"
-  >
-    <section id="hero" class="border-border border-b pt-8 pb-6">
-      <div class="my-4 flex flex-wrap items-center gap-x-5 gap-y-2 sm:my-8">
-        <h1 class="text-4xl font-bold sm:text-5xl">DBB 技術筆記</h1>
-        <a
-          target="_blank"
-          href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
-          class="inline-flex"
-          aria-label="RSS Feed"
-          title="RSS Feed"
-        >
-          <IconRss
-            width={20}
-            height={20}
-            class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
-          />
-          <span class="sr-only">RSS Feed</span>
-        </a>
+  <main id="main-content" data-layout="index" data-home-path={homePath}>
+    <section
+      id="hero"
+      class="border-border relative isolate h-[clamp(320px,42vw,520px)] overflow-hidden border-b"
+    >
+      <img
+        src={heroImage}
+        alt=""
+        class="absolute inset-0 -z-20 size-full object-cover object-[62%_100%]"
+        loading="eager"
+        decoding="async"
+      />
+      <div
+        class="absolute inset-0 -z-10 bg-linear-to-b from-black/20 via-black/35 to-black/65"
+      >
       </div>
 
-      <p>
-        網站構建中。
-      </p>
+      <div
+        class="flex size-full items-center justify-center px-5 py-10 text-white"
+      >
+        <blockquote class="mx-auto max-w-3xl text-center">
+          <p class="text-2xl leading-relaxed font-semibold sm:text-4xl">
+            Arrange whatever pieces come your way.
+          </p>
+        </blockquote>
+      </div>
+    </section>
 
+    <section class="app-layout border-border border-b py-10">
+      <h1 class="text-3xl font-bold sm:text-5xl">DBB 技術隨筆</h1>
 
       {
         socials.length > 0 && (
@@ -74,7 +76,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
         <section
           id="featured"
           class:list={[
-            "pt-12 pb-6",
+            "app-layout pt-12 pb-6",
             { "border-border border-b": recentPosts.length > 0 },
           ]}
         >
@@ -92,7 +94,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
 
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
+        <section id="recent-posts" class="app-layout pt-12 pb-6">
           <h2 class="text-2xl font-semibold tracking-wide">
             {t.home.recentPosts}
           </h2>
@@ -105,7 +107,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
       )
     }
 
-    <div class="my-8 text-center">
+    <div class="app-layout my-8 text-center">
       <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
         {t.home.allPosts}
         <IconArrowRight class="inline-block rtl:-rotate-180" />

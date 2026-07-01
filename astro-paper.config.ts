@@ -3,7 +3,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 export default defineAstroPaperConfig({
   site: {
     url: "https://tech.dbb.tw/",
-    title: "DBB 技術筆記",
+    title: "DBB 技術隨筆",
     description: "DBB tech notes",
     author: "DBB",
     profile: "https://dbb.tw",

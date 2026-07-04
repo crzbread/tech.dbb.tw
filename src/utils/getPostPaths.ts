@@ -23,6 +23,14 @@ function getIdSlug(id: string): string {
 function getPostSlugPath(id: string, filePath: string | undefined): string {
   const pathSegments = getPostPathSegments(filePath);
   const slug = getIdSlug(id);
+  const isIndex = filePath
+    ? /\/index\.(md|mdx)$/i.test(filePath.replace(/\\/g, "/"))
+    : false;
+
+  if (isIndex && pathSegments.length > 0) {
+    return pathSegments.join("/");
+  }
+
   return pathSegments.length > 0
     ? [...pathSegments, slug].join("/")
     : String(slug);

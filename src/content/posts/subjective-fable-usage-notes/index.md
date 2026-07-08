@@ -8,7 +8,7 @@ featured: false
 tags:
   - others
   - AI
-description: "Description"
+description: ""
 ---
 
 Introductory sentence

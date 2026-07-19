@@ -11,8 +11,6 @@ tags:
 description: ""
 ---
 
-Introductory sentence
-
 ## Table of contents
 
 ## 前言：我只是想做一個很帥的時間線
